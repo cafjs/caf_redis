@@ -1,7 +1,7 @@
 {
     "name": "caf_redis",
     "description": "Cloud Assistant Framework Redis components.",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "author": "Antonio Lain <antlai@cafjs.com>",
     "dependencies": {
         "caf_components" : "^0.2.0",
@@ -20,5 +20,5 @@
     "scripts": {
         "test": "node ./node_modules/.bin/nodeunit"
     },
-    "engines": { "node": ">= 0.8.1 " }
+    "engines": { "node": ">= 0.10.1 " }
 }
