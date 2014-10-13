@@ -1,0 +1,10 @@
+image: bradrydzewski/node:0.8 
+script:
+  - npm install
+  - npm test
+services:
+  - redis
+notify:
+  email:
+    recipients:
+      - ci.cafjs@gmail.com

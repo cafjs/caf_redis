@@ -1,0 +1,24 @@
+{
+    "name": "caf_redis",
+    "description": "Cloud Assistant Framework Redis components.",
+    "version": "0.2.0",
+    "author": "Antonio Lain <antlai@cafjs.com>",
+    "dependencies": {
+        "caf_components" : "^0.2.0",
+        "redis" : ">=0.10.0",
+        "async" : ">=0.1.9"
+    },
+    "devDependencies": {
+        "nodeunit" : ">=0.9"
+    },
+    "main": "index",
+    "homepage": "http://www.cafjs.com",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/cafjs/caf_redis.git"
+    },
+    "scripts": {
+        "test": "node ./node_modules/.bin/nodeunit"
+    },
+    "engines": { "node": ">= 0.8.1 " }
+}
