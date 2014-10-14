@@ -19,7 +19,7 @@
             }
         },
         {
-            "name": "h1",
+            "name": "cp",
             "module" : "../../index.js#plug",
             "description" : "redisPlug",
             "env" : {
@@ -33,6 +33,16 @@
                     "interval" : 10,
                     "maxPendingUpdates" : 10
                 }
+            }
+        },
+        {
+            "name": "h2",
+            "module" : "./ChildImpl",
+            "description" : "Child2",
+            "env" : {
+                "message" : "child2",
+                "number" : 9,
+                "leaseTimeout": 1
             }
         }
     ]
