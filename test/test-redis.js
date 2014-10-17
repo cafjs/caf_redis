@@ -57,3 +57,32 @@ exports.helloworld = function (test) {
                  });
 
 };
+
+exports.nolease = function(test) {
+
+    test.expect(3);
+    var context;
+    async.series([
+                     function(cb) {
+                         hello.load(null, null, 'hello1.json', null,
+                                    function(err, $) {
+                                        context = $;
+                                        test.ifError(err);
+                                        test.equal(typeof($.topRedis), 'object',
+                                                   'Cannot create hello');
+                                        cb(err, $);
+                                    });
+                     },
+                     function(cb) {
+                         context._.$.h2.updateState(cb);
+                     }
+                 ], function(err, data) {
+                     test.ok(err && (typeof err === 'object'),
+                             "No error with update without lease");
+                     var cb = function() {
+                         test.done();
+                     };
+                     context.topRedis.__ca_shutdown__(null, cb);
+                 });
+
+};
