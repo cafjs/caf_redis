@@ -48,6 +48,6 @@ To improve performance we aggregate both state updates and lease renewals from s
     
 *  `nodeId:` a default identifier for the lease owner of all the CAs that
 use this plug.
-*  `interval:` the number of miliseconds that we delay update requests, to have a better chance to aggregate them in a single request.
-*  `maxPendingUpdates:`
+*  `interval:` the number of miliseconds that we delay update requests, so we can aggregate them in a single request.
+*  `maxPendingUpdates:` The maximum number of pending updates before flushing them in a single request.
 
