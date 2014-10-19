@@ -40,7 +40,7 @@ exports.newInstance = function($, spec, cb) {
         };
 
         that.renewLease = function(cb0) {
-            $._.$.cp.grabLease([uuid], spec.env.leaseTimeout, cb0);
+            $._.$.cp.renewLeases([uuid], spec.env.leaseTimeout, cb0);
         };
 
         that.updateState = function(cb0) {

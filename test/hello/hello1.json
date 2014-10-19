@@ -44,6 +44,86 @@
                 "number" : 9,
                 "leaseTimeout": 1
             }
+        },
+        {
+            "name": "h3",
+            "module" : "./ChildImpl",
+            "description" : "Child3",
+            "env" : {
+                "message" : "child3",
+                "number" : 93,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h4",
+            "module" : "./ChildImpl",
+            "description" : "Child4",
+            "env" : {
+                "message" : "child4",
+                "number" : 94,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h5",
+            "module" : "./ChildImpl",
+            "description" : "Child5",
+            "env" : {
+                "message" : "child5",
+                "number" : 95,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h6",
+            "module" : "./ChildImpl",
+            "description" : "Child6",
+            "env" : {
+                "message" : "child6",
+                "number" : 96,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h7",
+            "module" : "./ChildImpl",
+            "description" : "Child7",
+            "env" : {
+                "message" : "child7",
+                "number" : 97,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h8",
+            "module" : "./ChildImpl",
+            "description" : "Child8",
+            "env" : {
+                "message" : "child8",
+                "number" : 98,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h9",
+            "module" : "./ChildImpl",
+            "description" : "Child9",
+            "env" : {
+                "message" : "child9",
+                "number" : 99,
+                "leaseTimeout": 1
+            }
+        },
+        {
+            "name": "h1",
+            "module" : "./ChildImpl",
+            "description" : "Child1",
+            "env" : {
+                "message" : "child1",
+                "number" : 91,
+                "leaseTimeout": 1
+            }
         }
     ]
 }
