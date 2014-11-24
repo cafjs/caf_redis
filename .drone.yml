@@ -1,4 +1,4 @@
-image: bradrydzewski/node:0.10 
+image: drone/node:0.10 
 script:
   - npm install
   - npm test
