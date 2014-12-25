@@ -355,5 +355,72 @@ module.exports = {
                          test.ifError(err);
                          test.done();
                      });
+    },
+    nodeLease: function(test) {
+        var self = this;
+        var all = ['h1','h2','h3','h4','h5', 'h6'];
+        var aliases = [];
+        test.expect(10);
+        async.series([
+                         function(cb) {
+                             async.map(all, function(x, cb0) {
+                                           var cb1 = function(err, data) {
+                                               aliases.push(data);
+                                               cb0(err, data);
+                                           };
+                                           self.$._.$.cp.grabNodeLease(1, cb1);
+                                       }, cb);
+                         },
+                         function(cb) {
+                             var cb0 = function(err, data) {
+                                 test.ifError(err);
+                                 var keys = Object
+                                     .keys(data)
+                                     .filter(function(x) {
+                                                 return (data[x] !== null);
+                                             });
+                                 test.equal(keys.length, all.length);
+                                 test.deepEqual(keys.sort(), aliases.sort());
+                                 cb(err, data);
+                             };
+                             self.$._.$.cp.listNodes(cb0);
+                         },
+                         function(cb) {
+                             var cb0 = function(err, data) {
+                                 test.equal(typeof(err), 'object');
+                                 test.ok(err !== null);
+                                 cb(null);
+                             };
+                             // this one fails
+                             self.$._.$.cp.grabNodeLease(1, cb0);
+                         },
+                         function(cb) {
+                             var cb0 = function(err, data) {
+                                 // expire all but this one
+                                 setTimeout(function() {
+                                                cb(err, data);
+                                            }, 1500);
+                             };
+                             self.$._.$.cp.renewNodeLease(10, cb0);
+                         },
+                         function(cb) {
+                             var cb0 = function(err, data) {
+                                 test.ifError(err);
+                                 test.equals(Object.keys(data).length, 6);
+                                 var keys = Object
+                                     .keys(data)
+                                     .filter(function(x) {
+                                                 return (data[x] !== null);
+                                             });
+                                 test.equal(keys.length, 1);
+                                 test.deepEqual(keys.sort(), ['sasdasd.vcap.me:4000']);
+                                 cb(err, data);
+                             };
+                             self.$._.$.cp.listNodes(cb0);
+                         }
+                     ], function(err, data) {
+                         test.ifError(err);
+                         test.done();
+                     });
     }
 };

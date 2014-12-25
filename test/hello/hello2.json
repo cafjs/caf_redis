@@ -23,7 +23,16 @@
             "module" : "../../index.js#plug",
             "description" : "redisPlug",
             "env" : {
-               "nodeId": "ssdsdasdsd_1",
+               "nodeId": "sasdasd.vcap.me:4000",
+                "localNodeId" : "localhost:3000",
+                "availableNodeIds": [
+                    "sasdasd.vcap.me:4000",
+                    "sasdasd.vcap.me:4001",
+                    "sasdasd.vcap.me:4002",
+                    "sasdasd.vcap.me:4003",
+                    "sasdasd.vcap.me:4004",
+                    "sasdasd.vcap.me:4005"
+                ],
                "redis" : {
                    "password" : null,
                    "host" : "localhost",
@@ -40,7 +49,16 @@
             "module" : "../../index.js#plug",
             "description" : "redisPlug",
             "env" : {
-               "nodeId": "ssdsdasdsd_2",
+               "nodeId": "sasdasd.vcap.me:4001",
+                "localNodeId" : "localhost:3001",
+                "availableNodeIds": [
+                    "sasdasd.vcap.me:4000",
+                    "sasdasd.vcap.me:4001",
+                    "sasdasd.vcap.me:4002",
+                    "sasdasd.vcap.me:4003",
+                    "sasdasd.vcap.me:4004",
+                    "sasdasd.vcap.me:4005"
+                ],
                "redis" : {
                    "password" : null,
                    "host" : "localhost",
