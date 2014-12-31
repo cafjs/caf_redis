@@ -357,8 +357,24 @@ module.exports = {
                      });
     },
     nodeLease: function(test) {
+        var all = [
+            "sasdasd.vcap.me:4000",
+            "sasdasd.vcap.me:4001",
+            "sasdasd.vcap.me:4002",
+            "sasdasd.vcap.me:4003",
+            "sasdasd.vcap.me:4004",
+            "sasdasd.vcap.me:4005"
+        ];
+        var localNodeId = {
+            "sasdasd.vcap.me:4000": "localhost:3000",
+            "sasdasd.vcap.me:4001": "localhost:3001",
+            "sasdasd.vcap.me:4002": "localhost:3002",
+            "sasdasd.vcap.me:4003": "localhost:3003",
+            "sasdasd.vcap.me:4004": "localhost:3004",
+            "sasdasd.vcap.me:4005": "localhost:3005"
+        };
+        var oneLocalNodeId = localNodeId["sasdasd.vcap.me:4000"];
         var self = this;
-        var all = ['h1','h2','h3','h4','h5', 'h6'];
         var aliases = [];
         test.expect(10);
         async.series([
@@ -368,7 +384,10 @@ module.exports = {
                                                aliases.push(data);
                                                cb0(err, data);
                                            };
-                                           self.$._.$.cp.grabNodeLease(1, cb1);
+                                           self.$._.$.cp
+                                               .grabNodeLease(all,
+                                                              localNodeId[x], 1,
+                                                              cb1);
                                        }, cb);
                          },
                          function(cb) {
@@ -383,7 +402,7 @@ module.exports = {
                                  test.deepEqual(keys.sort(), aliases.sort());
                                  cb(err, data);
                              };
-                             self.$._.$.cp.listNodes(cb0);
+                             self.$._.$.cp.listNodes(all, cb0);
                          },
                          function(cb) {
                              var cb0 = function(err, data) {
@@ -392,7 +411,8 @@ module.exports = {
                                  cb(null);
                              };
                              // this one fails
-                             self.$._.$.cp.grabNodeLease(1, cb0);
+                             self.$._.$.cp.grabNodeLease(all,  'foo:76',
+                                                         1, cb0);
                          },
                          function(cb) {
                              var cb0 = function(err, data) {
@@ -401,7 +421,8 @@ module.exports = {
                                                 cb(err, data);
                                             }, 1500);
                              };
-                             self.$._.$.cp.renewNodeLease(10, cb0);
+                             self.$._.$.cp.renewNodeLease(oneLocalNodeId, 10,
+                                                          cb0);
                          },
                          function(cb) {
                              var cb0 = function(err, data) {
@@ -413,10 +434,11 @@ module.exports = {
                                                  return (data[x] !== null);
                                              });
                                  test.equal(keys.length, 1);
-                                 test.deepEqual(keys.sort(), ['sasdasd.vcap.me:4000']);
+                                 test.deepEqual(keys.sort(),
+                                                ['sasdasd.vcap.me:4000']);
                                  cb(err, data);
                              };
-                             self.$._.$.cp.listNodes(cb0);
+                             self.$._.$.cp.listNodes(all, cb0);
                          }
                      ], function(err, data) {
                          test.ifError(err);
