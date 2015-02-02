@@ -427,7 +427,7 @@ module.exports = {
                          function(cb) {
                              var cb0 = function(err, data) {
                                  test.ifError(err);
-                                 test.equals(Object.keys(data).length, 6);
+                                 test.equals(Object.keys(data).length, 1);
                                  var keys = Object
                                      .keys(data)
                                      .filter(function(x) {
