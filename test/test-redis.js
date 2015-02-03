@@ -402,7 +402,8 @@ module.exports = {
                                  test.deepEqual(keys.sort(), aliases.sort());
                                  cb(err, data);
                              };
-                             self.$._.$.cp.listNodes(all, cb0);
+                             self.$._.$.cp.listNodes(null, cb0);
+//                             self.$._.$.cp.listNodes(all, cb0);
                          },
                          function(cb) {
                              var cb0 = function(err, data) {
