@@ -445,5 +445,63 @@ module.exports = {
                          test.ifError(err);
                          test.done();
                      });
+    },
+    cache : function(test) {
+        var self = this;
+        test.expect(9);
+        async.series([
+                         function(cb) {
+                              self.$._.$.cp.updateCache('key1', 'foo', 1, cb);
+                         },
+                         function(cb) {
+                             var cb1 = function(err, data) {
+                                 test.ifError(err);
+                                 test.equal(data, 'foo');
+                                 cb(err, data);
+                             };
+                             self.$._.$.cp.getCache('key1', cb1);
+                         },
+                         // expire entry
+                         function(cb) {
+                             var cb1 = function(err, data) {
+                                 test.ifError(err);
+                                 test.equal(data, null);
+                                 cb(err, data);
+                             };
+                             setTimeout(function() {
+                                            self.$._.$.cp.getCache('key1', cb1);
+                                        }, 1500);
+                         },
+                         // overwrite
+                         function(cb) {
+                              self.$._.$.cp.updateCache('key1', 'foo2', 1, cb);
+                         },
+                         function(cb) {
+                              self.$._.$.cp.updateCache('key1', 'foo3', 1, cb);
+                         },
+                         function(cb) {
+                              self.$._.$.cp.updateCache('key2', 'bar', 1, cb);
+                         },
+                         function(cb) {
+                             var cb1 = function(err, data) {
+                                 test.ifError(err);
+                                 test.equal(data, 'foo3');
+                                 cb(err, data);
+                             };
+                             self.$._.$.cp.getCache('key1', cb1);
+                         },
+                         function(cb) {
+                             var cb1 = function(err, data) {
+                                 test.ifError(err);
+                                 test.equal(data, 'bar');
+                                 cb(err, data);
+                             };
+                             self.$._.$.cp.getCache('key2', cb1);
+                         }
+                     ], function(err, data) {
+                         test.ifError(err);
+                         test.done();
+                     });
+
     }
 };
