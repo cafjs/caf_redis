@@ -1,6 +1,8 @@
 var async = require('async');
 var hello = require('./hello/main.js');
 
+var MAP1 = 'owner-ca1-map1';
+
 module.exports = {
     setUp: function (cb) {
         var self = this;
@@ -503,5 +505,115 @@ module.exports = {
                          test.done();
                      });
 
+    },
+    map : function(test) {
+        var self = this;
+        test.expect(19);
+        var changes1 = {version: 0, remove:[], add: ['foo', {a:1},
+                                                        'bar', true,
+                                                        '__ca_version__', 1]};
+        var changes3 = {version: 1, remove:['bar'],
+                        add: ['foo', {a:2}, '__ca_version__', 2]};
+        var changes4 = {version: 2, remove:[], add:
+                        ['foo', {a:2}, '__ca_version__', 2] };
+
+        var compareMap = function(actual, expected) {
+            test.equal(actual.version, expected.version);
+            test.deepEqual(actual.remove, expected.remove);
+            var toObj = function(x) {
+                var result = {};
+                var key = null;
+                x.forEach(function(a, i) {
+                    if (i%2 === 0) {
+                        key = a;
+                    } else {
+                        result[key] = a;
+                    }
+                });
+                return result;
+            };
+            test.deepEqual(toObj(actual.add), toObj(expected.add));
+        };
+
+        var count = 0;
+        var handler1 = function(err, data) {
+            console.log(data);
+            if (count === 0) {
+                compareMap(data, changes1);
+            } else if (count === 1) {
+                compareMap(data, changes3);
+            }
+            count = count + 1;
+        };
+
+        async.series([
+            function(cb) {
+                self.$.topRedis.__ca_shutdown__(null, cb);
+            },
+            function(cb) {
+                hello.load(null, null, 'hello2.json', null,
+                           function(err, $) {
+                               self.$ = $;
+                               test.ifError(err);
+                               test.equal(typeof($.topRedis),
+                                          'object',
+                                          'Cannot create hello');
+                               cb(err, $);
+                           });
+            },
+            function(cb) {
+                self.$._.$.cp.createMap(MAP1, cb);
+            },
+            function(cb) {
+                self.$._.$.cp2.subscribeMap(MAP1, handler1, cb);
+            },
+
+            function(cb) {
+                self.$._.$.cp.updateMap(MAP1, changes1, cb);
+            },
+            function(cb) {
+                var changes2 = {version: 1, remove:[], add: changes1.add};
+                var cb1 = function(err, data) {
+                    compareMap(data, changes2);
+                    cb(err, data);
+                };
+                self.$._.$.cp.readMap(MAP1,  cb1);
+            },
+            function(cb) {
+                self.$._.$.cp.updateMap(MAP1, changes3, cb);
+            },
+            function(cb) {
+                var cb1 = function(err, data) {
+                    compareMap(data, changes4);
+                    cb(err, data);
+                };
+                self.$._.$.cp.readMap(MAP1,  cb1);
+            },
+            function(cb) {
+                self.$._.$.cp2.unsubscribeMap(MAP1, cb);
+            },
+            function(cb) {
+                var cb1 = function(err, data) {
+                    compareMap(data, changes4);
+                    cb(err, data);
+                };
+                self.$._.$.cp.createMap(MAP1, cb1);
+            },
+
+            function(cb) {
+                self.$._.$.cp.deleteMap(MAP1, cb);
+            },
+            function(cb) {
+                var cb1 = function(err, data) {
+                    test.ok(err);
+                    console.log(err);
+                    cb(null, data);
+                };
+                self.$._.$.cp.readMap(MAP1,  cb1);
+            }
+        ], function(err, data) {
+            test.ifError(err);
+            test.done();
+        });
     }
 };
