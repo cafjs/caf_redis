@@ -514,7 +514,7 @@ module.exports = {
                                                         '__ca_version__', 1]};
         var changes3 = {version: 1, remove:['bar'],
                         add: ['foo', {a:2}, '__ca_version__', 2]};
-        var changes4 = {version: 2, remove:[], add:
+        var changes4 = {version: 0, remove:[], add:
                         ['foo', {a:2}, '__ca_version__', 2] };
 
         var compareMap = function(actual, expected) {
@@ -572,7 +572,7 @@ module.exports = {
                 self.$._.$.cp.updateMap(MAP1, changes1, cb);
             },
             function(cb) {
-                var changes2 = {version: 1, remove:[], add: changes1.add};
+                var changes2 = {version: 0, remove:[], add: changes1.add};
                 var cb1 = function(err, data) {
                     compareMap(data, changes2);
                     cb(err, data);
