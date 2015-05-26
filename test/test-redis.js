@@ -590,7 +590,9 @@ module.exports = {
                 self.$._.$.cp.readMap(MAP1,  cb1);
             },
             function(cb) {
-                self.$._.$.cp2.unsubscribeMap(MAP1, cb);
+                setTimeout(function() {
+                    self.$._.$.cp2.unsubscribeMap(MAP1, cb);
+                }, 1000);
             },
             function(cb) {
                 var cb1 = function(err, data) {
