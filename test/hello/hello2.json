@@ -26,7 +26,7 @@
                "nodeId": "sasdasd.vcap.me:4000",
                "redis" : {
                    "password" : null,
-                   "host" : "localhost",
+                   "hostname" : "localhost",
                    "port" : 6379
                 },
                 "coalescing" : {
@@ -43,7 +43,7 @@
                "nodeId": "sasdasd.vcap.me:4001",
                "redis" : {
                    "password" : null,
-                   "host" : "localhost",
+                   "hostname" : "localhost",
                    "port" : 6379
                 },
                 "coalescing" : {

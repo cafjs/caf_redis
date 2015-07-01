@@ -36,7 +36,7 @@ To improve performance we aggregate both state updates and lease renewals from s
                "nodeId": "ssdsdasdsd",
                "redis" : {
                    "password" : null,
-                   "host" : "localhost",
+                   "hostname" : "localhost",
                    "port" : 6379
                 },
                 "coalescing" : {
