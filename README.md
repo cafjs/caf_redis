@@ -34,6 +34,7 @@ To improve performance we aggregate both state updates and lease renewals from s
             "name": "cp",
             "env": {
                "nodeId": "ssdsdasdsd",
+               "paas" : "redis",
                "redis" : {
                    "password" : null,
                    "hostname" : "localhost",
@@ -46,8 +47,9 @@ To improve performance we aggregate both state updates and lease renewals from s
             }
     }
     
-*  `nodeId:` a default identifier for the lease owner of all the CAs that
-use this plug.
+*  `nodeId:` an optional, default identifier for the lease owner of all the 
+CAs that use this plug.
+*  `paas:` a name for this service to dynamically lookup configuration using `$.paas`.
 *  `interval:` the number of miliseconds that we delay update requests, so we can aggregate them in a single request.
 *  `maxPendingUpdates:` The maximum number of pending updates before flushing them in a single request.
 

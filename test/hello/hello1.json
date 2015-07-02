@@ -24,6 +24,7 @@
             "description" : "redisPlug",
             "env" : {
                "nodeId": "sasdasd.vcap.me:4000",
+               "paas" : "redis",
                "redis" : {
                    "password" : null,
                    "hostname" : "localhost",
