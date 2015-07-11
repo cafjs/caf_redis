@@ -23,6 +23,7 @@
             "module" : "../../index.js#plug",
             "description" : "redisPlug",
             "env" : {
+                "appName" : "foo-test",
                "nodeId": "sasdasd.vcap.me:4000",
                "paas" : "redis",
                "redis" : {
@@ -41,6 +42,7 @@
             "module" : "../../index.js#plug",
             "description" : "redisPlug",
             "env" : {
+                "appName" : "foo-test",
                "nodeId": "sasdasd.vcap.me:4001",
                "paas" : "redis",
                "redis" : {

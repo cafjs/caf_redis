@@ -1,7 +1,18 @@
 var async = require('async');
 var hello = require('./hello/main.js');
+var caf_comp = require('caf_components');
+var myUtils = caf_comp.myUtils;
 
 var MAP1 = 'owner-ca1-map1';
+
+process.on('uncaughtException', function (err) {
+    console.log("Uncaught Exception: " + err);
+    console.log(err.stack);
+    //console.log(myUtils.errToPrettyStr(err));
+    process.exit(1);
+
+});
+
 
 module.exports = {
     setUp: function (cb) {
