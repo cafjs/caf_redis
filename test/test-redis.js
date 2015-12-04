@@ -1,6 +1,6 @@
-var async = require('async');
 var hello = require('./hello/main.js');
 var caf_comp = require('caf_components');
+var async = caf_comp.async;
 var myUtils = caf_comp.myUtils;
 
 var MAP1 = 'owner-ca1-map1';
