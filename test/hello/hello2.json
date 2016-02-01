@@ -15,7 +15,7 @@
             "module" : "caf_components#plug_log",
             "description" : "Logger",
             "env" : {
-                "logLevel" : "TRACE"
+                "logLevel" : "DEBUG"
             }
         },
         {
