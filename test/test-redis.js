@@ -392,6 +392,10 @@ module.exports = {
         test.expect(10);
         async.series([
                          function(cb) {
+                // ensure that nodes from other unrelated tests (e.g., caf_platform) expired
+                             setTimeout(function() { cb(null);}, 10000);
+                         },
+                         function(cb) {
                              async.map(all, function(x, cb0) {
                                            var cb1 = function(err, data) {
                                                aliases.push(data);
