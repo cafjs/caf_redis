@@ -5,6 +5,11 @@ var myUtils = caf_comp.myUtils;
 
 var MAP1 = 'owner-ca1-map1';
 
+var TOPIC1 = 'topic1';
+var MSG1 = 'hello';
+var TOPIC2 = 'topic2';
+var MSG2 = 'goodbye';
+
 process.on('uncaughtException', function (err) {
     console.log("Uncaught Exception: " + err);
     console.log(err.stack);
@@ -627,6 +632,71 @@ module.exports = {
                     cb(null, data);
                 };
                 self.$._.$.cp.readMap(MAP1,  cb1);
+            }
+        ], function(err, data) {
+            test.ifError(err);
+            test.done();
+        });
+    },
+    pubsub: function(test) {
+        var self = this;
+        test.expect(7);
+        var deliverF = function(topic, message) {
+            if (topic === TOPIC1) {
+                test.equal(topic, TOPIC1, 'invalid topic');
+                test.equal(message, MSG1, 'invalid message');
+            } else {
+                test.equal(topic, TOPIC2, 'invalid topic');
+                test.equal(message, MSG2, 'invalid message');
+            }
+        };
+        async.series([
+            function(cb) {
+                self.$.topRedis.__ca_shutdown__(null, cb);
+            },
+            function(cb) {
+                hello.load(null, null, 'hello2.json', null,
+                           function(err, $) {
+                               self.$ = $;
+                               test.ifError(err);
+                               test.equal(typeof($.topRedis),
+                                          'object',
+                                          'Cannot create hello');
+                               cb(err, $);
+                           });
+            },
+            function(cb) {
+                self.$._.$.cp.subscribePubSub(TOPIC1, deliverF, cb);
+            },
+            function(cb) {
+                // +2 checks
+                self.$._.$.cp2.publishPubSub(TOPIC1, MSG1, cb);
+            },
+            function(cb) {
+                // ok because it is not subscribed (+0 checks)
+                self.$._.$.cp2.publishPubSub(TOPIC2, MSG1, cb);
+            },
+            function(cb) {
+                self.$._.$.cp.subscribePubSub(TOPIC2, deliverF, cb);
+            },
+            function(cb) {
+                 // +2 checks
+                self.$._.$.cp2.publishPubSub(TOPIC2, MSG2, cb);
+            },
+            function(cb) {
+                self.$._.$.cp.unsubscribePubSub(TOPIC2,  cb);
+            },
+            function(cb) {
+                 // +0 checks
+                self.$._.$.cp2.publishPubSub(TOPIC2, MSG1, cb);
+            },
+            function(cb) {
+                self.$._.$.cp.clearPubSub(deliverF);
+                cb(null);
+            },
+            function(cb) {
+                // +0 checks
+                self.$._.$.cp2.publishPubSub(TOPIC1, MSG2, cb);
             }
         ], function(err, data) {
             test.ifError(err);
