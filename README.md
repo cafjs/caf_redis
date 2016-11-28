@@ -1,8 +1,8 @@
-# CAF (Cloud Assistant Framework)
+# CAF.js (Cloud Assistant Framework)
 
-Co-design permanent, active, stateful, reliable cloud proxies with your web app.
+Co-design permanent, active, stateful, reliable cloud proxies with your web app and gadgets.
 
-See http://www.cafjs.com 
+See http://www.cafjs.com
 
 ## CAF Redis
 [![Build Status](http://ci.cafjs.com/api/badges/cafjs/caf_redis/status.svg)](http://ci.cafjs.com/cafjs/caf_redis)
@@ -12,7 +12,7 @@ This library provides components to checkpoint the state of CAs using Redis.
 
 CAF Redis uses a lease-based  mechanism to ensure that at most one instance of a particular CA is active in the data centre. This keeps CA state consistent.
 
-Lease ownership is based on a unique id associated with the CA hosting node.js process. This process should also ensure uniqueness for its own CAs. 
+Lease ownership is based on a unique id associated with the CA hosting node.js process. This process should also ensure uniqueness for its own CAs.
 
 Only the owner can read, update, or permanently delete the CA state.
 
@@ -22,33 +22,12 @@ To improve performance we aggregate both state updates and lease renewals from s
 
 ## API
 
-    lib/plug_checkpoint.js
- 
-## Configuration Example
+This is an **internal** API for other services. Application code should not use it directly.
+
+See {@link  module:caf_redis/plug_checkpoint}
+
+## Configuration
 
 ### framework.json
 
-    {
-            "module": "plug_checkpoint",
-            "name": "cp",
-            "env": {
-               "nodeId": "ssdsdasdsd",
-               "paas" : "redis",
-               "redis" : {
-                   "password" : null,
-                   "hostname" : "localhost",
-                   "port" : 6379
-                },
-                "coalescing" : {
-                    "interval" : 10,
-                    "maxPendingUpdates" : 10
-                }
-            }
-    }
-    
-*  `nodeId:` an optional, default identifier for the lease owner of all the 
-CAs that use this plug.
-*  `paas:` a name for this service to dynamically lookup configuration using `$.paas`.
-*  `interval:` the number of miliseconds that we delay update requests, so we can aggregate them in a single request.
-*  `maxPendingUpdates:` The maximum number of pending updates before flushing them in a single request.
-
+See {@link  module:caf_redis/gen_redis_plug}
