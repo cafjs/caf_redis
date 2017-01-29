@@ -468,6 +468,45 @@ module.exports = {
                          test.done();
                      });
     },
+    bits: function(test) {
+       var self = this;
+        test.expect(7);
+        async.series([
+            function(cb) {
+                self.$._.$.cp.setBits('key1', [1, 10, 15], cb);
+            },
+            function(cb) {
+                var cb1 = function(err, data) {
+                    test.ifError(err);
+                    test.equal(data, true);
+                    cb(err, data);
+                };
+                self.$._.$.cp.checkBits('key1', [1, 10, 15], cb1);
+            },
+            function(cb) {
+                var cb1 = function(err, data) {
+                    test.ifError(err);
+                    test.equal(data, null);
+                    cb(err, data);
+                };
+                self.$._.$.cp.checkBits('key1', [1, 10, 16], cb1);
+            },
+            function(cb) {
+                self.$._.$.cp.clearBits('key1', cb);
+            },
+            function(cb) {
+                var cb1 = function(err, data) {
+                    test.ifError(err);
+                    test.equal(data, null);
+                    cb(err, data);
+                };
+                self.$._.$.cp.checkBits('key1', [1, 10, 15], cb1);
+            }
+        ], function(err, data) {
+            test.ifError(err);
+            test.done();
+        });
+    },
     cache : function(test) {
         var self = this;
         test.expect(9);
