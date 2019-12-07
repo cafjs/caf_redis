@@ -621,7 +621,7 @@ module.exports = {
                            });
             },
             function(cb) {
-                self.$._.$.cp.createMap(MAP1, cb);
+                self.$._.$.cp.createMap(MAP1, null, cb);
             },
             function(cb) {
                 self.$._.$.cp2.subscribeMap(MAP1, handler1, cb);
@@ -658,7 +658,7 @@ module.exports = {
                     compareMap(data, changes4);
                     cb(err, data);
                 };
-                self.$._.$.cp.createMap(MAP1, cb1);
+                self.$._.$.cp.createMap(MAP1, null, cb1);
             },
 
             function(cb) {
