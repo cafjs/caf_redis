@@ -34,7 +34,8 @@
                 "coalescing" : {
                     "interval" : 10,
                     "maxPendingUpdates" : 10
-                }
+                },
+                "compressState": "process.env.COMPRESS_STATE||true"
             }
         },
         {

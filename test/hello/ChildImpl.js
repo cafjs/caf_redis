@@ -11,7 +11,7 @@ var genComponent =  caf_comp.gen_component;
 exports.newInstance = function($, spec, cb) {
     try {
         var that = genComponent.constructor($, spec);
-        var uuid = Math.floor(Math.random() *10000000000000000);
+        var uuid = '' + Math.floor(Math.random() *10000000000000000);
         var counter = 0;
         var state = {message: spec.env.message,
                      number: spec.env.number,
