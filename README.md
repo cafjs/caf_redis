@@ -1,10 +1,10 @@
-# CAF.js (Cloud Assistant Framework)
+# Caf.js
 
 Co-design permanent, active, stateful, reliable cloud proxies with your web app and gadgets.
 
 See http://www.cafjs.com
 
-## CAF Redis
+## Redis Library for Caf.js
 [![Build Status](https://travis-ci.org/cafjs/caf_redis.svg?branch=master)](https://travis-ci.org/cafjs/caf_redis)
 
 
