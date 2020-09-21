@@ -1,12 +1,12 @@
 {
     "name": "caf_redis",
     "description": "Cloud Assistant Framework Redis components.",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "author": "Antonio Lain <antlai@cafjs.com>",
     "license": "Apache-2.0",
     "dependencies": {
         "caf_components" : "^0.4.0",
-        "redis" : "^2.6.2",
+        "redis" : "^3.0.0",
         "caf_transport" : "^0.4.0",
         "lzo": "^0.4.11"
     },
