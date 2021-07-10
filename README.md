@@ -5,7 +5,8 @@ Co-design cloud assistants with your web app and IoT devices.
 See https://www.cafjs.com
 
 ## Redis Library for Caf.js
-[![Build Status](https://travis-ci.org/cafjs/caf_redis.svg?branch=master)](https://travis-ci.org/cafjs/caf_redis)
+
+[![Build Status](https://github.com/cafjs/caf_redis/actions/workflows/push.yml/badge.svg)](https://github.com/cafjs/caf_redis/actions/workflows/push.yml)
 
 
 This library provides components to checkpoint the state of CAs using Redis.
