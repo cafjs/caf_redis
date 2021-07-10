@@ -28,7 +28,7 @@
                "paas" : "redis",
                "redis" : {
                    "password" : null,
-                   "hostname" : "localhost",
+                   "hostname" :  "process.env.REDIS_PORT_6379_TCP_ADDR||localhost",
                    "port" : 6379
                 },
                 "coalescing" : {
