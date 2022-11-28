@@ -376,22 +376,22 @@ module.exports = {
     },
     nodeLease: function(test) {
         var all = [
-            "sasdasd.vcap.me:4000",
-            "sasdasd.vcap.me:4001",
-            "sasdasd.vcap.me:4002",
-            "sasdasd.vcap.me:4003",
-            "sasdasd.vcap.me:4004",
-            "sasdasd.vcap.me:4005"
+            "sasdasd.localtest.me:4000",
+            "sasdasd.localtest.me:4001",
+            "sasdasd.localtest.me:4002",
+            "sasdasd.localtest.me:4003",
+            "sasdasd.localtest.me:4004",
+            "sasdasd.localtest.me:4005"
         ];
         var localNodeId = {
-            "sasdasd.vcap.me:4000": "localhost:3000",
-            "sasdasd.vcap.me:4001": "localhost:3001",
-            "sasdasd.vcap.me:4002": "localhost:3002",
-            "sasdasd.vcap.me:4003": "localhost:3003",
-            "sasdasd.vcap.me:4004": "localhost:3004",
-            "sasdasd.vcap.me:4005": "localhost:3005"
+            "sasdasd.localtest.me:4000": "localhost:3000",
+            "sasdasd.localtest.me:4001": "localhost:3001",
+            "sasdasd.localtest.me:4002": "localhost:3002",
+            "sasdasd.localtest.me:4003": "localhost:3003",
+            "sasdasd.localtest.me:4004": "localhost:3004",
+            "sasdasd.localtest.me:4005": "localhost:3005"
         };
-        var oneLocalNodeId = localNodeId["sasdasd.vcap.me:4000"];
+        var oneLocalNodeId = localNodeId["sasdasd.localtest.me:4000"];
         var self = this;
         var aliases = [];
         test.expect(10);
@@ -458,7 +458,7 @@ module.exports = {
                                              });
                                  test.equal(keys.length, 1);
                                  test.deepEqual(keys.sort(),
-                                                ['sasdasd.vcap.me:4000']);
+                                                ['sasdasd.localtest.me:4000']);
                                  cb(err, data);
                              };
                              self.$._.$.cp.listNodes(all, cb0);

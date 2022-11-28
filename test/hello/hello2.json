@@ -24,7 +24,7 @@
             "description" : "redisPlug",
             "env" : {
                 "appName" : "foo-test",
-               "nodeId": "sasdasd.vcap.me:4000",
+               "nodeId": "sasdasd.localtest.me:4000",
                "paas" : "redis",
                "redis" : {
                    "password" : null,
@@ -44,7 +44,7 @@
             "description" : "redisPlug",
             "env" : {
                 "appName" : "foo-test",
-               "nodeId": "sasdasd.vcap.me:4001",
+               "nodeId": "sasdasd.localtest.me:4001",
                "paas" : "redis",
                "redis" : {
                    "password" : null,
